@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { buttonVariants } from '../../components/ui/button'
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card"
+
+import {
+  getAllCategories, 
+} from "../../lib/cosmic";
+
+
+const data3 = await getAllCategories();
+---
+<BaseLayout
+  title="Jamstack Shopping Cart With Astro"
+  description="This template helps you build apps with Astro, Tailwind CSS, and Shadcn UI."
+>
+
+<section class="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+
+<div class="flex max-w-[980px] flex-col items-start gap-2">
+  <h1 class="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+    Safety Technology <br class="hidden sm:inline" />
+    Products for an unsafe world.
+  </h1>
+  <p class="max-w-[700px] text-lg text-muted-foreground">
+    Keep your loved ones and yourself protected.
+  </p>
+</div>
+
+</section>
+
+<section class="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+
+<header class="flex max-w-[980px] flex-col items-start gap-2">
+  <h2 class="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">Product Categories</h2>
+</header>
+
+<div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-4 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-6">
+{
+        data3.map((category) => (
+  <Card>
+  <CardHeader>
+    <CardTitle>{category.title}</CardTitle>
+    <CardDescription>Product Categories</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p><img src={category.metadata.category_image.imgix_url + '?w=450'} /></p>
+  </CardContent>
+  <CardFooter>
+    <div class="flex gap-6">
+     <a href="#" target="_blank" rel="noreferrer" class={buttonVariants({ variant: 'outline' })}>SubCategories</a>
+     <a href="#" target="_blank" rel="noreferrer" class={buttonVariants()}>Products</a>
+    </div>
+  </CardFooter>
+</Card>
+))
+}
+</div>
+</section>
+
+<section class="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+  <header class="flex max-w-[980px] flex-col items-start gap-2">
+    <h2 class="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">Product Categories</h2>
+  </header>
+
+  <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">
+{
+      data3.map((category) => (    
+      <div class="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
+        <div class="flex flex-1 flex-col space-y-4 p-4 items-center">
+          <h3 class="text-med font-medium text-gray-900">
+            <a href="#"><span aria-hidden="true" class="absolute inset-0"></span>{category.title}</a>
+          </h3>
+        </div>
+
+        <div class="bg-gray-200 group-hover:opacity-75 sm:h-96">
+          <img src={category.thumbnail} class="h-full w-full object-cover object-center sm:h-full sm:w-full" />
+        </div>
+        <div class="flex flex-1 flex-col space-y-4 p-4 items-center">
+          <div class="flex gap-10">
+           <a href="#" target="_blank" rel="noreferrer" class={buttonVariants({ variant: 'outline' })}>Show Products</a>
+           <a href="#" target="_blank" rel="noreferrer" class={buttonVariants()}>Show SubCategories</a>
+          </div>
+        </div>
+      </div>
+))
+}
+    </div>
+</section>
+
+<section class="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+  <header class="flex max-w-[980px] flex-col items-start gap-2">
+    <h2 class="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">Product Categories</h2>
+  </header>
+
+  <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-8">
+{
+      data3.map((category) => (    
+      <div class="group relative flex flex-col overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm">
+        <span class="p-4 text-2xl font-semibold leading-none tracking-tight">
+          <span aria-hidden="true" class="absolute inset-0"></span>{category.title}
+          <span class="block p-t-8 text-sm text-muted-foreground font-light">Product Category</span>
+        </span>
+        <div class="group-hover:opacity-75 sm:h-96">
+          <img src={category.thumbnail} class="h-full w-full object-cover object-center sm:h-full sm:w-full" />
+        </div>
+        <div class="flex flex-1 flex-col space-y-4 p-4 items-center">
+          <div class="flex gap-4">
+           <a href="#" target="_blank" rel="noreferrer" class={buttonVariants({ variant: 'outline' })}>Products</a>
+           <a href="#" target="_blank" rel="noreferrer" class={buttonVariants()}>SubCategories</a>
+          </div>
+        </div>
+      </div>
+))
+}
+    </div>
+</section>
+</BaseLayout>

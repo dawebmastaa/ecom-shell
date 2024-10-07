@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { buttonVariants } from '../../components/ui/button'
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '../../components/ui/card'
+
+import { 
+  getAllSubCategories, 
+} from '../../lib/cosmic';
+
+
+const data = await getAllSubCategories();
+---
+<BaseLayout
+  title="Safety Technology - Product SubCategories"
+  description="A description for SEO would go here at some point."
+>
+
+<section class="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+
+<div class="flex max-w-[980px] flex-col items-start gap-2">
+  <h1 class="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+    Safety Technology <br class="hidden sm:inline" />
+    Products for an unsafe world.
+  </h1>
+  <p class="max-w-[700px] text-lg text-muted-foreground">
+    Keep your loved ones and yourself protected.
+  </p>
+</div>
+
+<div class="flex max-w-[980px] flex-col items-start gap-2">
+  <h2 class="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">Product SubCategories</h2>
+</div>
+
+<div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-4 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-6">
+{
+        data.map((subcategory) => (
+  <Card>
+  <CardHeader>
+    <CardTitle>{subcategory.title}</CardTitle>
+    <CardDescription>Category: {subcategory.metadata.category.category[0].title}</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p><img src={subcategory.metadata.subcategory_image.imgix_url + '?w=450'} /></p>
+  </CardContent>
+  <CardFooter>
+    <div class="flex gap-10">
+     <a href="#" target="_blank" rel="noreferrer" class={buttonVariants({ variant: 'outline' })}>{subcategory.metadata.category.category[0].title}</a>
+     <a href="#" target="_blank" rel="noreferrer" class={buttonVariants()}>Products</a>
+    </div>
+  </CardFooter>
+</Card>
+))
+}
+</div>
+  </section>
+
+</BaseLayout>
