@@ -1,3 +1,5 @@
+ecom-shell.code-workspace
+
 # build output
 dist/
 # generated types
