@@ -51,12 +51,14 @@ const data5 = await getAllProducts();
           </div>
           <div class="flex gap-32">
            <a href="#" target="_blank" rel="noreferrer" class={buttonVariants({ variant: 'outline' })}>More Info</a>
-           <button class="snipcart-add-item" data-item-id="starry-night"
+           <a class="snipcart-add-item"
+           data-item-id={product.metadata.itemid}
            data-item-price={Intl.NumberFormat("en-US", {style: "decimal"}).format(product.metadata.price)}
            data-item-description={product.metadata.short_description}
            data-item-image={product.metadata.images[0].image_link + '-/resize/x300/'}
-           data-item-name={product.title}>Add To Cart
-           </button>
+           data-item-name={product.title}
+           data-item-url={Astro.request.url}>Add To Cart
+           </a>
           </div>
         </div>
       </div>
