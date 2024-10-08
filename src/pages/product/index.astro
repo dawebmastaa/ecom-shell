@@ -50,7 +50,7 @@ const data5 = await getAllProducts();
             <p class="text-base font-medium text-gray-500">{Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(product.metadata.price)}</p>
           </div>
           <div class="flex gap-32">
-           <a href="#" target="_blank" rel="noreferrer" class={buttonVariants({ variant: 'outline' })}>More Info</a>
+           <a href="#" rel="noreferrer" class={buttonVariants({ variant: 'outline' })}>More Info</a>
            <button class="snipcart-add-item"
            data-item-id={product.metadata.itemid}
            data-item-price={Intl.NumberFormat("en-US", {style: "decimal"}).format(product.metadata.price)}
