@@ -51,7 +51,7 @@ const data5 = await getAllProducts();
           </div>
           <div class="flex gap-32">
            <a href="#" rel="noreferrer" class={buttonVariants({ variant: 'outline' })}>More Info</a>
-           <button class={buttonVariants({ variant: 'buybutton' })}
+           <button class="snipcart-add-item"
            data-item-id={product.metadata.itemid}
            data-item-price={Intl.NumberFormat("en-US", {style: "decimal"}).format(product.metadata.price)}
            data-item-description={product.metadata.short_description}
@@ -95,17 +95,5 @@ const data5 = await getAllProducts();
   </div>
 ))
 }
-
-<div class="flex max-w-[980px] flex-col items-start gap-2">
-  <h1
-    class="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl"
-  >
-    Safety Technology <br class="hidden sm:inline" />
-    Products for an unsafe world.
-  </h1>
-  <p class="max-w-[700px] text-lg text-muted-foreground">
-    Keep your loved ones and yourself protected.
-  </p>
-</div>
 </section>
 </BaseLayout>
