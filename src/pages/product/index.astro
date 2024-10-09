@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { buttonVariants } from '../../components/ui/button'
+import { Product } from '@lloydjatkinson/astro-snipcart/astro';
 
 import {
   Card,
@@ -18,8 +19,6 @@ import {
 } from '../../lib/cosmic';
 
 
-const data3 = await getAllCategories();
-const data4 = await getAllSubCategories();
 const data5 = await getAllProducts();
 ---
 <BaseLayout
@@ -28,72 +27,41 @@ const data5 = await getAllProducts();
 >
 
 <section class="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-<div>
-  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-    <h2 class="sr-only">Products</h2>
 
-    <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">
-{
-      data5.map((product) => (    
-      <div class="group relative flex flex-col overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm">
-        <h3 class="p-4 text-lg font-medium text-gray-500"><h3>
-        <div class="relative h-72 w-full overflow-hidden">
-          <img src={product.metadata.images[0].image_link + '-/resize/x400/'} alt={product.metadata.images[0].alt_text} class="h-full w-full object-cover object-center">
-        </div>
-        <div class="flex flex-1 flex-col space-y-2 p-4">
-          <h3 class="text-lg font-medium text-gray-700">
-            <span aria-hidden="true" class="absolute inset-0"></span>{product.title}
-          </h3>
-          <p class="text-sm text-gray-500"><Fragment set:html={product.metadata.long_description.replace(/(?:\r\n|\r|\n)/g, '<br />').slice(0,250) + '...'} /></p>
-          <div class="flex flex-1 flex-col justify-end">
-            <p class="text-sm italic text-gray-500"></p>
-            <p class="text-base font-medium text-gray-500">{Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(product.metadata.price)}</p>
-          </div>
-          <div class="flex gap-32">
-           <a href="#" rel="noreferrer" class={buttonVariants({ variant: 'outline' })}>More Info</a>
-           <button class="snipcart-add-item"
-           data-item-id={product.metadata.itemid}
-           data-item-price={Intl.NumberFormat("en-US", {style: "decimal"}).format(product.metadata.price)}
-           data-item-description={product.metadata.short_description}
-           data-item-image={product.metadata.images[0].image_link + '-/resize/x300/'}
-           data-item-name={product.title}
-           data-item-url={Astro.request.url}>Add To Cart
-           </button>
-          </div>
-        </div>
+  <header class="flex max-w-[980px] flex-col items-start gap-2">
+    <h2 class="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">Products</h2>
+  </header>
+  
+  <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-4 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-6">
+  {
+    data5.map((product) => (
+    <Card>
+    <CardHeader>
+      <CardTitle>{product.title}</CardTitle>
+      <CardDescription>{product.metadata.short_description}</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <p><img src={product.metadata.images[0].image_link + '-/resize/x400/'} /></p>
+    </CardContent>
+    <CardFooter>
+      <div class="flex gap-10">
+       <a href="#" target="_blank" rel="noreferrer" class={buttonVariants({ variant: 'outline' })}>More Info</a>
+       <Product
+       as="span"
+       id={product.metadata.itemid}
+       name={product.title}
+       url={Astro.request.url}
+       price={product.metadata.price}
+       description={product.metadata.short_description}
+       image={product.metadata.images[0].image_link + '-/resize/x200/'}>
+        <button class={buttonVariants()}>Add To Cart</button>
+      </Product>
       </div>
-))
-}
-    </div>
+    </CardFooter>
+  </Card>
+  ))
+  }
   </div>
+    </section>
 
-{
-      data5.map((product) => (
-  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-    <h2 class="text-xl font-bold text-gray-700">Featured Products</h2>
-
-    <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-      <div>
-        <div class="relative">
-          <div class="relative h-72 w-full overflow-hidden rounded-lg">
-            <img src={product.metadata.images[0].image_link + '-/resize/x300/'} alt={product.metadata.images[0].alt_text} class="h-full w-full object-cover object-center">
-          </div>
-          <div class="relative mt-4">
-            <h3 class="text-sm font-medium text-gray-500">{product.title}</h3>
-            <p class="mt-1 text-sm text-gray-500"><a href="#">More Info</a></p>
-          </div>
-          <div class="absolute inset-x-0 top-0 flex h-72 items-end justify-end overflow-hidden rounded-lg p-4">
-            <div aria-hidden="true" class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50"></div>
-            <p class="relative text-lg font-semibold text-white">{Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(product.metadata.price)}</p>
-          </div>
-        </div>
-        <div class="mt-6">
-          <a href="#" class="relative flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-8 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200">Add to Cart<span class="sr-only">, {product.title}</span></a>
-        </div>
-      </div>
-    </div>
-  </div>
-))
-}
-</section>
 </BaseLayout>
