@@ -16,9 +16,9 @@ const { title, description, ogImage } = Astro.props
 <html lang="en">
   <head>
     <HeadSEO title={title} description={description} ogImage={ogImage} />
-    <SnipcartSetup />
   </head>
   <body class="min-h-screen bg-background font-sans antialiased">
+    <SnipcartSetup />
     <div class="relative flex min-h-screen flex-col">
       <Header />
       <main class="flex-auto">
