@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getAllProducts } from "../../lib/cosmic";
+
+export async function getStaticPaths() {
+const response = await getAllProducts()
+
+  return response.map((product) => {
+    return {
+      params: { slug: product.slug },
+      props: { product },
+    };
+  });
+}
+
+const {product} = Astro.props;
+---
+
+<BaseLayout
+  title="Product Page"
+  description="This is the product display template. For now there's only one product"
+>
+
+</BaseLayout>
