@@ -1,9 +1,9 @@
 {
-  "name": "@area44/astro-shadcn-ui-template",
+  "name": "@dawebmastaa/ecom-shell",
   "version": "23.12.26",
-  "description": "An Astro template for building apps.",
+  "description": "A Jamstack ecomm prototype with Astro, Tailwind, Shadcn UI, CosmicJS, etc.",
   "author": {
-    "name": "AREA44"
+    "name": "DaWebMastaa"
   },
   "license": "MIT",
   "scripts": {
@@ -17,7 +17,6 @@
     "@astrojs/react": "^3.6.2",
     "@astrojs/tailwind": "^5.1.1",
     "@cosmicjs/sdk": "^1.2.0",
-    "@lloydjatkinson/astro-snipcart": "^0.3.0",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.1.0",
     "astro": "^4.15.11",
