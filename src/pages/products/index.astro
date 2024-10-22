@@ -43,7 +43,12 @@ const data5 = await getAllProducts();
     <CardFooter>
       <div class="flex gap-10">
        <a href="#" target="_blank" rel="noreferrer" class={buttonVariants({ variant: 'outline' })}>More Info</a>
-        <button class={buttonVariants()}>Add To Cart</button>
+       <button class={buttonVariants({ variant: 'buy' })} data-item-id={product.metadata.itemid}
+           data-item-price={Intl.NumberFormat("en-US", {style: "decimal"}).format(product.metadata.price)}
+           data-item-description={product.metadata.short_description}
+           data-item-image={product.metadata.images[0].image_link + '-/resize/x300/'}
+           data-item-name={product.title}>Add To Cart
+           </button>
       </div>
     </CardFooter>
   </Card>

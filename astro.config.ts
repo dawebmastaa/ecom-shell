@@ -5,8 +5,8 @@ import tailwind from '@astrojs/tailwind'
 // https://astro.build/config
 export default defineConfig({
   site: process.env.CI
-    ? 'https://ecom-shell.netlify.app/'
-    : 'http://localhost:4321',
+    ? 'https://www.selfprotection.shop/'
+    : 'http://localhost:4321/',
   integrations: [
     react(),
     tailwind({
