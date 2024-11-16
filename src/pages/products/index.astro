@@ -20,7 +20,7 @@ const data5 = await getAllProducts();
 ---
 <BaseLayout
   title="Product Page"
-  description="This is the product display template. For now there's only one product"
+  description="This is the product display template."
 >
 
 <section class="container grid items-center gap-6 pb-8 pt-6 md:py-10">
@@ -35,10 +35,9 @@ const data5 = await getAllProducts();
     <Card>
     <CardHeader>
       <CardTitle>{product.title}</CardTitle>
-      <CardDescription>{product.metadata.short_description}</CardDescription>
     </CardHeader>
     <CardContent>
-      <p><img src={product.metadata.images[0].image_link + '-/resize/x400/'} /></p>
+      <p><img src={product.metadata.images[0].image_link + '-/resize/x400/'} />{Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(product.metadata.price)}</p>
     </CardContent>
     <CardFooter>
       <div class="flex gap-10">
