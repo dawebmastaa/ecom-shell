@@ -269,3 +269,13 @@
   border: none;
   @apply bg-background text-foreground;
 }
+
+div.snipcart-field-error {
+  color: var(--color-error) !important;
+  font-weight: bold;
+}
+
+div.snipcart-input--invalid input {
+  border: 1px solid var(--color-error) !important;
+  box-shadow: none !important;
+}
